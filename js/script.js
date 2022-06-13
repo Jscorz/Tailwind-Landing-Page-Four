@@ -12,3 +12,33 @@ if (
 } else {
 	themeToggleDarkIcon.classList.remove("hidden");
 }
+
+// Listen for toggle button click
+themeToggleBtn.addEventListener("click", toggleMode);
+
+function toggleMode() {
+	// Toggle icon
+	themeToggleDarkIcon.classList.toggle("hidden");
+	themeToggleLightIcon.classList.toggle("hidden");
+
+	// if is set in localStorage
+	if (localStorage.getItem("color-theme")) {
+		// If light, make dark and save in localStorage
+		if (localStorage.getItem("color-theme") === "light") {
+			document.documentElement.classList.add("dark");
+			localStorage.setItem("color-theme", "dark");
+		} else {
+			document.documentElement.classList.remove("dark");
+			localStorage.setItem("color-theme", "light");
+		}
+	} else {
+		// If not in localStorage
+		if (document.documentElement.classList.contains("dark")) {
+			document.documentElement.classList.remove("dark");
+			localStorage.setItem("color-theme", "light");
+		} else {
+			document.documentElement.classList.add("dark");
+			localStorage.setItem("color-theme", "dark");
+		}
+	}
+}
